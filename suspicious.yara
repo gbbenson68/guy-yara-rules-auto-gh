@@ -11503,25 +11503,3 @@ rule Backdoor_PHP_WPVCD_Deployer {
     condition:
        $re
 }
-
-rule Spam_PHP_WPVCD_ContentInjection {
-    meta:
-       description = "Content injection script associated with WP-VCD."
-
-    strings:
-       $re = /\$ip\s*=\s*\@file_get_contents\s*\(\s*ABSPATH\s*\.\s*['"]wp\-includes\/wp\-feed\.php['"]/ nocase
-
-    condition:
-       $re
-}
-
-rule Suspicious_PHP_PrependedInclude {
-    meta:
-       description = "Suspicious PHP include often associated with WP-VCD."
-
-    strings:
-       $re = /^\<\?php\s+if\s*\(\s*file_exists\s*\(\s*dirname\s*\(\s*__FILE__\s*\)\s*\.\s*['"][^'"]+['"]\s*\)\s*\)\s*(include|require)(_once)?\s*\(\s*dirname\s*\(\s*__FILE__\s*\)\s*\.\s*['"][^'"]+['"]\s*\)\s*\;\s*\?\>\s*\<\?/ nocase
-
-    condition:
-       $re
-}
